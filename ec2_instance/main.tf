@@ -43,7 +43,7 @@ resource "aws_security_group" "allow_ssh_http" {
 }
 
 resource "aws_instance" "app" {
-  ami                    = var.ami
+  ami                    = ami-023a307f3d27ea427
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.main.id
   vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
