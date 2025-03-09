@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-00c257e12d6828491" // Replace with the AMI ID you want to use
+  ami           = "ami-023a307f3d27ea427" // Replace with the AMI ID you want to use
   instance_type = "t2.micro"
   user_data = <<-EOF
               #!/bin/bash
