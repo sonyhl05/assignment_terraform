@@ -48,6 +48,20 @@ resource "aws_instance" "web" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
   subnet_id              = element(aws_subnet.public[*].id, 0)
+  # Using a user_data script to install Ansible on boot
+  user_data = <<-EOF
+              #!/bin/bash
+              # Update package list and install prerequisites
+              apt-get update -y
+              apt-get install -y software-properties-common
+
+              # Add Ansible PPA and install Ansible
+              apt-add-repository --yes --update ppa:ansible/ansible
+              apt-get install -y ansible
+
+              # Optionally, you could log the installation status
+              echo "Ansible installed successfully" > /tmp/ansible_install.log
+              EOF
 
   tags = {
     Name        = "web-server-${local.environment}"
