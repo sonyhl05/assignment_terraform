@@ -48,7 +48,7 @@ resource "aws_instance" "web" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_ssh_http.id]
   subnet_id              = element(aws_subnet.public[*].id, 0)
-  key_name               = aws-keypair
+  key_name               = "aws-keypair"
   # Using a user_data script to install Ansible on boot
   user_data = <<-EOF
               #!/bin/bash
